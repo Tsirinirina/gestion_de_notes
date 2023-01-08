@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>
+		{% block title %}{% endblock %}
+		- Gestion de note
+	</title>
+	<link rel="icon"
+		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}" /> {% block stylesheets %}{{ encore_entry_link_tags('datepicker') }}{% endblock %}
+	<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+
+	<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
+	<script src="{{ asset('assets/js/scripts.js') }}" defer></script>
+	{% block javascripts %}{{ encore_entry_script_tags('datepicker') }}{% endblock %}
+</head>
+<style>
+	#link-a {
+		text-decoration: none;
+	}
+</style>
+
+<body>
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<a class="h2 me-5" href="{{ path('home') }}" id="link-a">G-D-E</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class=" fa fa-bars "></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link text-dark" href="{{ path('eleve_index') }}">Eleves</a>
+					</li>
+
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Matiers
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							{% for matier in matiers %}
+							<li>
+								<a class="dropdown-item" href="#">{{ matier.nomMatier }}</a>
+							</li>
+							<li>
+								<hr class="dropdown-divider" />
+							</li>
+							{% endfor %}
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-dark" href="{{ path('notes_all') }}">Toutes les Notes</a>
+					</li>
+
+				</ul>
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+					{% if app.user %}
+					<li class="nav-item">
+						<a class="nav-link btn btn-link text-dark mx-2" href="">Mon Compte</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link btn btn-link text-dark mx-2" href="">Me Déconnecter</a>
+					</li>
+					{% else %}
+					<li class="nav-item">
+						<a class="nav-link btn btn-link text-dark mx-2" href="">Me Connecter</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link btn btn-link text-dark mx-2" href="">M'Inscrire</a>
+					</li>
+					{% endif %}
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	{% for label, messages in app.flashes %}
+	{% for message in messages %}
+	<div class="alert alert-{{ label }} alert-dismissible" role="alert">
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		<div class="alert-message">
+			{{ message|raw }}
+		</div>
+	</div>
+	{% endfor %}
+	{% endfor %}
+
+	<div class="container p-3 mb-5 mt-2 bg-light rounded-3"> {% block body %}{% endblock %}
+	</div>
+
+	<footer class="container-fluid bg-dark text-light fixed-bottom mt-3">
+		<div class="row">
+			<section class="col">Colonne 1</section>
+			<section class="col">Collone 2</section>
+			<section class="col">Collone 3</section>
+		</div>
+	</footer>
+
+</body>
+<script>
+	$(document).on('ready', function () {
+		$('.js-datepicker').datepicker({ format: 'dd-mm-yyyy' });
+	});
+</script>
+
+</html>

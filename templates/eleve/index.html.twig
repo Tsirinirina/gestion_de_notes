@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Eleves {% endblock %}
+
+{% block body %}
+    <h1>Eleves </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_eleve</th>
+                <th>Date_naissance</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for elefe in eleves %}
+            <tr>
+                <td>{{ elefe.id }}</td>
+                <td>{{ elefe.nomEleve }}</td>
+                <td>{{ elefe.dateNaissance ? elefe.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('eleve_voir', {'id': elefe.id}) }}">Voir</a>
+                    <a href="{{ path('eleve_modifier', {'id': elefe.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune élève enregistrer</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('eleve_ajouter') }}">Ajouter une nouvelle élève</a>
+{% endblock %}

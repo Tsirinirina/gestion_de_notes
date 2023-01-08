@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notes
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <h4>LISTE DES NOTES DES ELEVES </h4>
+    <table class="table table-light table-striped">
+        <thead>
+            <tr>
+                <th>#ID</th>
+                <th>Nom</th>
+                <th>Matiere</th>
+                <th>Semestre</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for note in notes %}
+            <tr>
+                <td>{{note.eleve.id}}</td>
+                <td>{{note.eleve.nomEleve}}</td>
+                <td>{{note.matier.nomMatier }}</td>
+                <td>Semestre {{note.semestre }}</td>
+                <td class="fw-bold">{{note.note }}</td>
+            </tr>
+
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Eleves{% endblock %}
+
+{% block body %}
+    <h1>Eleves</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ elefe.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_eleve</th>
+                <td>{{ elefe.nomEleve }}</td>
+            </tr>
+            <tr>
+                <th>Date_naissance</th>
+                <td>{{ elefe.dateNaissance ? elefe.dateNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('eleve_index') }}">Retour</a>
+
+    <a href="{{ path('eleve_index', {'id': elefe.id}) }}">Modifier</a>
+
+    {{ include('eleve/_supprimer_form.html.twig') }}
+{% endblock %}

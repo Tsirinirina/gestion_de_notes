@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modification
+{% endblock %}
+{% block body %}
+	<h1>Formulaire de modification d'une élève</h1>
+
+	{{ include('eleve/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+	<a href="{{ path('eleve_index') }}">retour</a>
+
+	{{ include('eleve/_supprimer_form.html.twig') }}
+{% endblock %}

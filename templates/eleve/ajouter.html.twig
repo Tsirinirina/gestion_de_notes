@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ajouter{% endblock %}
+{% block body %}
+    <h1>Formulaire d'insertion d'un nouvelle élève</h1>
+
+    {{ include('eleve/_form.html.twig') }}
+
+    <a href="{{ path('eleve_index') }}">Retour</a>
+{% endblock %}
